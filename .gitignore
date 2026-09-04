@@ -1,4 +1,5 @@
 .gradle/
+.gradle-user/
 .idea/
 build/
 */build/
@@ -8,4 +9,3 @@ local.properties
 captures/
 .externalNativeBuild/
 .cxx/
-
