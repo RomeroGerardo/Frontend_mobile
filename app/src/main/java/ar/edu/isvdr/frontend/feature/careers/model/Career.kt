@@ -2,17 +2,18 @@ package ar.edu.isvdr.frontend.feature.careers.model
 
 /**
  * Modelo de datos que representa una Carrera.
- *
- * TODO: Confirmar con el equipo de backend los campos exactos de la API.
- * Por ahora se incluyen campos representativos para listado, detalle y
- * la URL para el botón de preinscripción.
+ * 
+ * Actualizado según el contrato de la API.
  */
 data class Career(
     val id: String,
-    val name: String,
-    val description: String,
-    val modality: String,
-    val duration: String,
-    val preinscriptionUrl: String? = null,
-    val imageUrl: String? = null
+    val nombre: String,
+    val slug: String,
+    val descripcion: String?,
+    val duracionAnios: Int?,
+    val tituloOtorgado: String?,
+    val modalidad: String,
+    val activa: Boolean,
+    val createdAt: String,
+    val updatedAt: String
 )
