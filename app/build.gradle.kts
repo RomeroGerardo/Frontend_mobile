@@ -22,9 +22,9 @@ android {
     }
 }
 
-kotlin {
-    jvmToolchain(17)
-}
+// kotlin {
+//     jvmToolchain(17)
+// }
 
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2024.12.01"))
