@@ -20,11 +20,26 @@ class CareerListViewModel(
         loadCareers()
     }
 
+    fun onSearchQueryChanged(query: String) {
+        _uiState.update { it.copy(searchQuery = query) }
+        loadCareers()
+    }
+
+    fun onModalityFilterChanged(modality: String?) {
+        _uiState.update { it.copy(selectedModality = modality) }
+        loadCareers()
+    }
+
     fun loadCareers() {
         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
         
         viewModelScope.launch {
-            val result = repository.getCareers()
+            val currentState = _uiState.value
+            val result = repository.getCareers(
+                buscar = currentState.searchQuery.takeIf { it.isNotBlank() },
+                modalidad = currentState.selectedModality
+            )
+            
             if (result.isSuccess) {
                 _uiState.update { 
                     it.copy(

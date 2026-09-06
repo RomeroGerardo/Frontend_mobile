@@ -15,6 +15,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.isvdr.frontend.feature.careers.model.Career
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Clear
+
 @Composable
 fun CareerListScreen(
     modifier: Modifier = Modifier,
@@ -23,12 +27,63 @@ fun CareerListScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    CareerListContent(
-        uiState = uiState,
-        modifier = modifier,
-        onCareerClick = onCareerClick,
-        onRetry = { viewModel.loadCareers() }
-    )
+    Column(modifier = modifier.fillMaxSize()) {
+        SearchAndFilterSection(
+            searchQuery = uiState.searchQuery,
+            selectedModality = uiState.selectedModality,
+            onSearchQueryChanged = viewModel::onSearchQueryChanged,
+            onModalitySelected = viewModel::onModalityFilterChanged
+        )
+        
+        CareerListContent(
+            uiState = uiState,
+            modifier = Modifier.weight(1f),
+            onCareerClick = onCareerClick,
+            onRetry = { viewModel.loadCareers() }
+        )
+    }
+}
+
+@Composable
+private fun SearchAndFilterSection(
+    searchQuery: String,
+    selectedModality: String?,
+    onSearchQueryChanged: (String) -> Unit,
+    onModalitySelected: (String?) -> Unit
+) {
+    Column(modifier = Modifier.padding(16.dp)) {
+        OutlinedTextField(
+            value = searchQuery,
+            onValueChange = onSearchQueryChanged,
+            modifier = Modifier.fillMaxWidth(),
+            placeholder = { Text("Buscar carreras...") },
+            leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") },
+            trailingIcon = {
+                if (searchQuery.isNotEmpty()) {
+                    IconButton(onClick = { onSearchQueryChanged("") }) {
+                        Icon(Icons.Default.Clear, contentDescription = "Limpiar búsqueda")
+                    }
+                }
+            },
+            singleLine = true
+        )
+        Spacer(modifier = Modifier.height(12.dp))
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            val modalities = listOf(null, "PRESENCIAL", "VIRTUAL", "HIBRIDA")
+            val labels = listOf("Todas", "Presencial", "Virtual", "Híbrida")
+            
+            modalities.forEachIndexed { index, mod ->
+                FilterChip(
+                    selected = selectedModality == mod,
+                    onClick = { onModalitySelected(mod) },
+                    label = { Text(labels[index]) }
+                )
+            }
+        }
+    }
 }
 
 @Composable
