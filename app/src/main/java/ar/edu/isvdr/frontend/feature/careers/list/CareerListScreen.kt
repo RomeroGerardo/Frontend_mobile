@@ -27,21 +27,14 @@ fun CareerListScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    Column(modifier = modifier.fillMaxSize()) {
-        SearchAndFilterSection(
-            searchQuery = uiState.searchQuery,
-            selectedModality = uiState.selectedModality,
-            onSearchQueryChanged = viewModel::onSearchQueryChanged,
-            onModalitySelected = viewModel::onModalityFilterChanged
-        )
-        
-        CareerListContent(
-            uiState = uiState,
-            modifier = Modifier.weight(1f),
-            onCareerClick = onCareerClick,
-            onRetry = { viewModel.loadCareers() }
-        )
-    }
+    CareerListContent(
+        uiState = uiState,
+        modifier = modifier,
+        onSearchQueryChanged = viewModel::onSearchQueryChanged,
+        onModalitySelected = viewModel::onModalityFilterChanged,
+        onCareerClick = onCareerClick,
+        onRetry = { viewModel.loadCareers() }
+    )
 }
 
 @Composable
@@ -90,41 +83,52 @@ private fun SearchAndFilterSection(
 private fun CareerListContent(
     uiState: CareerListUiState,
     modifier: Modifier = Modifier,
+    onSearchQueryChanged: (String) -> Unit,
+    onModalitySelected: (String?) -> Unit,
     onCareerClick: (String) -> Unit,
     onRetry: () -> Unit
 ) {
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
-    ) {
-        when {
-            uiState.isLoading -> {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
-            }
-            uiState.errorMessage != null -> {
-                ErrorView(
-                    message = uiState.errorMessage,
-                    onRetry = onRetry
-                )
-            }
-            uiState.careers.isEmpty() -> {
-                Text(
-                    text = "No hay carreras disponibles.",
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            }
-            else -> {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    contentPadding = PaddingValues(16.dp),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
-                ) {
-                    items(uiState.careers) { career ->
-                        CareerCard(
-                            career = career,
-                            onClick = { onCareerClick(career.id) }
-                        )
+    Column(modifier = modifier.fillMaxSize()) {
+        SearchAndFilterSection(
+            searchQuery = uiState.searchQuery,
+            selectedModality = uiState.selectedModality,
+            onSearchQueryChanged = onSearchQueryChanged,
+            onModalitySelected = onModalitySelected
+        )
+
+        Box(
+            modifier = Modifier.weight(1f).fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+            when {
+                uiState.isLoading -> {
+                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                }
+                uiState.errorMessage != null -> {
+                    ErrorView(
+                        message = uiState.errorMessage,
+                        onRetry = onRetry
+                    )
+                }
+                uiState.careers.isEmpty() -> {
+                    Text(
+                        text = "No hay carreras disponibles.",
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                }
+                else -> {
+                    LazyColumn(
+                        modifier = Modifier.fillMaxSize(),
+                        contentPadding = PaddingValues(16.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        items(uiState.careers) { career ->
+                            CareerCard(
+                                career = career,
+                                onClick = { onCareerClick(career.id) }
+                            )
+                        }
                     }
                 }
             }
@@ -211,6 +215,8 @@ private fun CareerListScreenPreview() {
         CareerListContent(
             uiState = CareerListUiState(
                 isLoading = false,
+                searchQuery = "",
+                selectedModality = null,
                 careers = listOf(
                     Career(
                         id = "1",
@@ -238,6 +244,8 @@ private fun CareerListScreenPreview() {
                     )
                 )
             ),
+            onSearchQueryChanged = {},
+            onModalitySelected = {},
             onCareerClick = {},
             onRetry = {}
         )
@@ -250,6 +258,8 @@ private fun CareerListScreenLoadingPreview() {
     MaterialTheme {
         CareerListContent(
             uiState = CareerListUiState(isLoading = true),
+            onSearchQueryChanged = {},
+            onModalitySelected = {},
             onCareerClick = {},
             onRetry = {}
         )
