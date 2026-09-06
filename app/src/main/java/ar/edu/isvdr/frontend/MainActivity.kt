@@ -24,13 +24,13 @@ class MainActivity : ComponentActivity() {
 private fun FrontendMobileApp() {
     MaterialTheme {
         Surface(modifier = Modifier.fillMaxSize()) {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+            val navController = androidx.navigation.compose.rememberNavController()
+            
+            androidx.navigation.compose.NavHost(
+                navController = navController,
+                startDestination = "careers_graph"
             ) {
-                Text("ISVDR", style = MaterialTheme.typography.headlineMedium)
-                Text("Base lista para comenzar el desarrollo por features")
+                ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph(navController)
             }
         }
     }
