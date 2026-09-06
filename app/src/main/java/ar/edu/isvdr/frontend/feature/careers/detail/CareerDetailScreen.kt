@@ -58,13 +58,14 @@ fun CareerDetailScreen(
                 }
                 uiState.errorMessage != null -> {
                     ErrorDetailView(
-                        message = uiState.errorMessage,
+                        message = uiState.errorMessage!!,
                         onRetry = { viewModel.loadCareerDetail(careerId) }
                     )
                 }
                 uiState.career != null -> {
+                    val careerToDraw = uiState.career!!
                     CareerDetailContent(
-                        career = uiState.career,
+                        career = careerToDraw,
                         onPreinscribirseClick = { onPreinscribirseClick(careerId) }
                     )
                 }

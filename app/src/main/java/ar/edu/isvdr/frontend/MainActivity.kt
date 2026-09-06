@@ -20,6 +20,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+import ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph
+
 @Composable
 private fun FrontendMobileApp() {
     MaterialTheme {
@@ -30,7 +32,7 @@ private fun FrontendMobileApp() {
                 navController = navController,
                 startDestination = "careers_graph"
             ) {
-                ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph(navController)
+                careersGraph(navController)
             }
         }
     }
