@@ -60,7 +60,14 @@ fun AppNavigation() {
             modifier = Modifier.padding(innerPadding)
         ) {
             composable(TopLevelDestination.Home.route) {
-                Text("Pantalla de Inicio", modifier = Modifier.padding(16.dp))
+                ar.edu.isvdr.frontend.feature.home.HomeScreen(
+                    onNavigateToCareers = {
+                        navController.navigate(TopLevelDestination.Careers.route)
+                    },
+                    onNavigateToInstitutional = {
+                        navController.navigate(TopLevelDestination.Institutional.route)
+                    }
+                )
             }
             composable(TopLevelDestination.Institutional.route) {
                 Text("Pantalla Institucional", modifier = Modifier.padding(16.dp))
