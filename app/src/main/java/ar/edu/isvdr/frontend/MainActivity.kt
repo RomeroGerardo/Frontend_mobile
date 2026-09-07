@@ -27,14 +27,7 @@ private fun FrontendMobileApp() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.background
         ) {
-            val navController = rememberNavController()
-
-            NavHost(
-                navController = navController,
-                startDestination = "careers_graph"
-            ) {
-                careersGraph(navController)
-            }
+            ar.edu.isvdr.frontend.core.navigation.AppNavigation()
         }
     }
 }
