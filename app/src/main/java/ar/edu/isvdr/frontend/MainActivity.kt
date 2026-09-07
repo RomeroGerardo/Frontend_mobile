@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import ar.edu.isvdr.frontend.core.theme.IsvdrTheme
 import ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph
 
 class MainActivity : ComponentActivity() {
@@ -21,16 +22,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun FrontendMobileApp() {
-    MaterialTheme {
-        Surface(modifier = Modifier.fillMaxSize()) {
-            val navController = rememberNavController()
-
-            NavHost(
-                navController = navController,
-                startDestination = "careers_graph"
-            ) {
-                careersGraph(navController)
-            }
+    IsvdrTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            ar.edu.isvdr.frontend.core.navigation.AppNavigation()
         }
     }
 }
