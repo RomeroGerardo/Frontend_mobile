@@ -13,11 +13,8 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ar.edu.isvdr.frontend.feature.campuses.data.Sede
 import androidx.compose.ui.Alignment
-@Preview(showBackground = true)
-@Composable
-fun SedesListScreenPreview() {
-    SedesListScreen()
-}
+import androidx.compose.ui.tooling.preview.Preview
+
 @Composable
 fun SedesListScreen(
     viewModel: SedesListViewModel = viewModel(),
@@ -69,13 +66,11 @@ fun SedeItem(sede: Sede, onClick: () -> Unit) {
             Text(sede.nombre, style = MaterialTheme.typography.titleMedium)
             Text("${sede.ciudad}, ${sede.provincia}")
         }
-        import androidx.compose.ui.tooling.preview.Preview
-
-                @Preview(showBackground = true)
-                @Composable
-                fun SedesListScreenPreview() {
-                    SedesListScreen()
-                }
     }
+}
 
+@Preview(showBackground = true)
+@Composable
+fun SedesListScreenPreview() {
+    SedesListScreen()
 }
