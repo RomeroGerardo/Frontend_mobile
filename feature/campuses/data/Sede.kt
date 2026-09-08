@@ -1,3 +1,5 @@
+package ar.edu.isvdr.frontend.feature.campuses.data
+
 data class Sede(
     val id: String,
     val nombre: String,
