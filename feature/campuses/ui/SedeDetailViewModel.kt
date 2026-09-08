@@ -23,7 +23,10 @@ class SedeDetailViewModel(
             try {
                 val sede = repository.getSedeById(id)
                 if (sede != null) {
-                    _uiState.update { it.copy(isLoading = false, sede = sede) }
+                    val carreras = repository.getCarrerasDeSede(sede)
+                    _uiState.update {
+                        it.copy(isLoading = false, sede = sede, carreras = carreras)
+                    }
                 } else {
                     _uiState.update { it.copy(isLoading = false, error = "Sede no encontrada") }
                 }

@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ar.edu.isvdr.frontend.feature.campuses.data.Carrera
 import ar.edu.isvdr.frontend.feature.campuses.data.Sede
 
 @Composable
@@ -32,14 +33,14 @@ fun SedeDetailScreen(
                 Text(state.error!!, color = MaterialTheme.colorScheme.error)
             }
             state.sede != null -> {
-                SedeDetailContent(sede = state.sede!!)
+                SedeDetailContent(sede = state.sede!!, carreras = state.carreras)
             }
         }
     }
 }
 
 @Composable
-fun SedeDetailContent(sede: Sede) {
+fun SedeDetailContent(sede: Sede, carreras: List<Carrera>) {
     Column(Modifier.fillMaxSize()) {
         Text(sede.nombre, style = MaterialTheme.typography.headlineSmall)
         Spacer(Modifier.height(8.dp))
@@ -48,6 +49,17 @@ fun SedeDetailContent(sede: Sede) {
         SedeInfoRow(label = "Dirección", value = sede.direccion)
         SedeInfoRow(label = "Teléfono", value = sede.telefono)
         SedeInfoRow(label = "Horarios", value = sede.horarios)
+
+        Spacer(Modifier.height(16.dp))
+        Text("Carreras disponibles", style = MaterialTheme.typography.titleMedium)
+        Spacer(Modifier.height(8.dp))
+        if (carreras.isEmpty()) {
+            Text("No hay carreras asociadas a esta sede")
+        } else {
+            carreras.forEach { carrera ->
+                Text("• ${carrera.nombre} (${carrera.duracion})")
+            }
+        }
     }
 }
 
@@ -72,6 +84,10 @@ fun SedeDetailScreenPreview() {
             telefono = "351-4000000",
             horarios = "8 a 20 hs",
             carrerasIds = listOf("c1", "c2")
+        ),
+        carreras = listOf(
+            Carrera("c1", "Tecnicatura en Programación", "2 años"),
+            Carrera("c2", "Ingeniería en Sistemas", "5 años")
         )
     )
 }
