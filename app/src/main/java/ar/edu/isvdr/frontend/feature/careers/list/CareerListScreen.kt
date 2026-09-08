@@ -99,10 +99,10 @@ private fun CareerListContent(
     ) {
         when {
             uiState.isLoading -> {
-                CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                ar.edu.isvdr.frontend.core.components.IsvdrLoadingState()
             }
             uiState.errorMessage != null -> {
-                ErrorView(
+                ar.edu.isvdr.frontend.core.components.IsvdrErrorState(
                     message = uiState.errorMessage,
                     onRetry = onRetry
                 )
@@ -138,69 +138,33 @@ fun CareerCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    Card(
+    ar.edu.isvdr.frontend.core.components.IsvdrStandardCard(
         onClick = onClick,
-        modifier = modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        )
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(
-                text = career.nombre,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            
-            career.tituloOtorgado?.let { titulo ->
-                Text(
-                    text = "Título: $titulo",
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-            }
-            
-            Text(
-                text = "Modalidad: ${career.modalidad}",
-                style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.secondary
-            )
-        }
-    }
-}
-
-@Composable
-private fun ErrorView(
-    message: String,
-    modifier: Modifier = Modifier,
-    onRetry: () -> Unit
-) {
-    Column(
-        modifier = modifier.padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        modifier = modifier
     ) {
         Text(
-            text = "Error al cargar las carreras:",
+            text = career.nombre,
             style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.error
+            color = MaterialTheme.colorScheme.onSurface,
+            maxLines = 2,
+            overflow = TextOverflow.Ellipsis
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onErrorContainer
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = onRetry) {
-            Text("Reintentar")
+        
+        career.tituloOtorgado?.let { titulo ->
+            Text(
+                text = "Título: $titulo",
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Spacer(modifier = Modifier.height(4.dp))
         }
+        
+        Text(
+            text = "Modalidad: ${career.modalidad}",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.secondary
+        )
     }
 }
 

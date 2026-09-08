@@ -54,10 +54,10 @@ fun CareerDetailScreen(
         ) {
             when {
                 uiState.isLoading -> {
-                    CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
+                    ar.edu.isvdr.frontend.core.components.IsvdrLoadingState()
                 }
                 uiState.errorMessage != null -> {
-                    ErrorDetailView(
+                    ar.edu.isvdr.frontend.core.components.IsvdrErrorState(
                         message = uiState.errorMessage!!,
                         onRetry = { viewModel.loadCareerDetail(careerId) }
                     )
@@ -125,13 +125,12 @@ private fun CareerDetailContent(
         Spacer(modifier = Modifier.weight(1f))
         Spacer(modifier = Modifier.height(24.dp))
 
-        Button(
+        ar.edu.isvdr.frontend.core.components.IsvdrPrimaryButton(
+            text = "Preinscribirse",
             onClick = onPreinscribirseClick,
             modifier = Modifier.fillMaxWidth(),
             enabled = career.activa
-        ) {
-            Text("Preinscribirse")
-        }
+        )
     }
 }
 
@@ -148,35 +147,6 @@ private fun DetailItem(label: String, value: String) {
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
-    }
-}
-
-@Composable
-private fun ErrorDetailView(
-    message: String,
-    modifier: Modifier = Modifier,
-    onRetry: () -> Unit
-) {
-    Column(
-        modifier = modifier.padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "Error al cargar la carrera:",
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.error
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = message,
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onErrorContainer
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Button(onClick = onRetry) {
-            Text("Reintentar")
-        }
     }
 }
 
