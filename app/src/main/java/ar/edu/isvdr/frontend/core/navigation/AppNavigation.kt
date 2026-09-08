@@ -62,10 +62,22 @@ fun AppNavigation() {
             composable(TopLevelDestination.Home.route) {
                 ar.edu.isvdr.frontend.feature.home.HomeScreen(
                     onNavigateToCareers = {
-                        navController.navigate(TopLevelDestination.Careers.route)
+                        navController.navigate(TopLevelDestination.Careers.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     onNavigateToInstitutional = {
-                        navController.navigate(TopLevelDestination.Institutional.route)
+                        navController.navigate(TopLevelDestination.Institutional.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
                 )
             }
