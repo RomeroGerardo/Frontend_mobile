@@ -29,6 +29,14 @@ data class HitoHistorico(
     val descripcion: String
 )
 
+data class ActividadVidaInstitucional(
+    val id: String,
+    val titulo: String,
+    val categoria: String,
+    val descripcion: String,
+    val estado: String
+)
+
 data class FechaImportante(
     val id: String,
     val titulo: String,
@@ -191,6 +199,44 @@ object InstitutionalMockData {
             periodo = "Actualidad",
             titulo = "Referente Técnico Regional",
             descripcion = "El ISVDR cuenta con múltiples sedes y carreras en constante actualización, consolidándose como un pilar fundamental del desarrollo educativo de Córdoba."
+        )
+    )
+
+    val actividadesVidaInstitucional = listOf(
+        ActividadVidaInstitucional(
+            id = "v1",
+            titulo = "Prácticas Profesionalizantes y Pasantías",
+            categoria = "Pasantías",
+            descripcion = "Convenios con empresas e instituciones de Villa del Rosario y la región para que los estudiantes de los últimos años apliquen sus conocimientos en situaciones reales de trabajo.",
+            estado = "Convenios activos"
+        ),
+        ActividadVidaInstitucional(
+            id = "v2",
+            titulo = "Talleres de Habilidades Técnicas y Blandas",
+            categoria = "Talleres",
+            descripcion = "Ciclos de capacitación complementaria en nuevas tecnologías, metodologías ágiles, oratoria y preparación para entrevistas laborales.",
+            estado = "Inscripciones periódicas"
+        ),
+        ActividadVidaInstitucional(
+            id = "v3",
+            titulo = "Programa de Tutorías entre Pares",
+            categoria = "Tutorías",
+            descripcion = "Espacio de orientación y acompañamiento académico donde estudiantes avanzados brindan apoyo a ingresantes en materias troncales.",
+            estado = "Todo el ciclo lectivo"
+        ),
+        ActividadVidaInstitucional(
+            id = "v4",
+            titulo = "Proyectos de Extensión y Vinculación Comunitaria",
+            categoria = "Extensión",
+            descripcion = "Iniciativas en las que docentes y estudiantes desarrollan proyectos tecnológicos, relevamientos y capacitaciones abiertas a la comunidad.",
+            estado = "Convocatoria abierta"
+        ),
+        ActividadVidaInstitucional(
+            id = "v5",
+            titulo = "Biblioteca Física y Repositorio Digital",
+            categoria = "Biblioteca",
+            descripcion = "Acceso a bibliografía técnica, libros de consulta, salas de estudio grupal y recursos digitales disponibles para toda la comunidad del ISVDR.",
+            estado = "Abierto de 18 a 22 hs"
         )
     )
 }

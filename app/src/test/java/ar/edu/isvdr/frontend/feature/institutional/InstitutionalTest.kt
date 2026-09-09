@@ -71,6 +71,10 @@ class InstitutionalTest {
         val hitosResult = repository.getHitosHistoricos()
         assertTrue(hitosResult.isSuccess)
         assertEquals(4, hitosResult.getOrNull()?.size)
+
+        val actividadesResult = repository.getActividadesVidaInstitucional()
+        assertTrue(actividadesResult.isSuccess)
+        assertEquals(5, actividadesResult.getOrNull()?.size)
     }
 
     @Test
@@ -88,5 +92,19 @@ class InstitutionalTest {
         )
         assertEquals("Fundación", hito.periodo)
         assertEquals("Nacimiento de la Educación Superior", hito.titulo)
+    }
+
+    @Test
+    fun `verificar modelo ActividadVidaInstitucional`() {
+        val actividad = ar.edu.isvdr.frontend.feature.institutional.model.ActividadVidaInstitucional(
+            id = "v1",
+            titulo = "Prácticas Profesionalizantes",
+            categoria = "Pasantías",
+            descripcion = "Convenios con empresas.",
+            estado = "Activo"
+        )
+        assertEquals("v1", actividad.id)
+        assertEquals("Pasantías", actividad.categoria)
+        assertEquals("Activo", actividad.estado)
     }
 }

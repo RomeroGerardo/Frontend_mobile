@@ -29,5 +29,11 @@ fun NavGraphBuilder.institutionalGraph(
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+
+        composable("institutional_vida") {
+            ar.edu.isvdr.frontend.feature.institutional.ui.VidaInstitucionalScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
     }
 }

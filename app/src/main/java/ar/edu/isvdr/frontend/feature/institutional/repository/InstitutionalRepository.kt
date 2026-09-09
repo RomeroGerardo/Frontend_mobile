@@ -68,4 +68,12 @@ class InstitutionalRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun getActividadesVidaInstitucional(): Result<List<ar.edu.isvdr.frontend.feature.institutional.model.ActividadVidaInstitucional>> {
+        return try {
+            Result.success(InstitutionalMockData.actividadesVidaInstitucional)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
