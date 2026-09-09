@@ -4,6 +4,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class TopLevelDestination(
@@ -14,4 +15,5 @@ sealed class TopLevelDestination(
     object Home : TopLevelDestination("home_route", "Inicio", Icons.Default.Home)
     object Institutional : TopLevelDestination("institutional_route", "Instituto", Icons.Default.Info)
     object Careers : TopLevelDestination("careers_graph", "Carreras", Icons.Default.List)
+    object Sedes : TopLevelDestination("sedes_graph", "Sedes", Icons.Default.LocationOn)
 }

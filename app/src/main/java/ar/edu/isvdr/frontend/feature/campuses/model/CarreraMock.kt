@@ -1,7 +1,7 @@
-package ar.edu.isvdr.frontend.feature.campuses.data
+package ar.edu.isvdr.frontend.feature.campuses.model
 
 // TODO: Reemplazar por el modelo real de Carrera del módulo de Gerardo
-// cuando exponga getCarrerasByIds(). Este modelo es temporal.
+// cuando exponga un método para traer carreras por ids. Este modelo es temporal.
 data class Carrera(
     val id: String,
     val nombre: String,

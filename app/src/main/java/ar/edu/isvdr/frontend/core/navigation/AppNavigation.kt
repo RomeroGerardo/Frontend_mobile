@@ -17,15 +17,17 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.unit.dp
 import ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph
+import ar.edu.isvdr.frontend.feature.campuses.navigation.sedesGraph
 
 @Composable
 fun AppNavigation() {
     val navController = rememberNavController()
-    
+
     val items = listOf(
         TopLevelDestination.Home,
         TopLevelDestination.Institutional,
-        TopLevelDestination.Careers
+        TopLevelDestination.Careers,
+        TopLevelDestination.Sedes
     )
 
     Scaffold(
@@ -33,7 +35,7 @@ fun AppNavigation() {
             NavigationBar {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
-                
+
                 items.forEach { screen ->
                     NavigationBarItem(
                         icon = { Icon(screen.icon, contentDescription = null) },
@@ -74,6 +76,8 @@ fun AppNavigation() {
             }
             // Agregamos el grafo de carreras que hizo Gerardo
             careersGraph(navController)
+            // Agregamos el grafo de sedes
+            sedesGraph(navController)
         }
     }
 }
