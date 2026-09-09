@@ -17,6 +17,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.unit.dp
 import ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph
+import ar.edu.isvdr.frontend.feature.institutional.navigation.institutionalGraph
 
 @Composable
 fun AppNavigation() {
@@ -69,9 +70,13 @@ fun AppNavigation() {
                     }
                 )
             }
-            composable(TopLevelDestination.Institutional.route) {
-                Text("Pantalla Institucional", modifier = Modifier.padding(16.dp))
-            }
+            // Módulo institucional desarrollado por Gabriel (I5)
+            institutionalGraph(
+                navController = navController,
+                onNavigateToCareers = {
+                    navController.navigate(TopLevelDestination.Careers.route)
+                }
+            )
             // Agregamos el grafo de carreras que hizo Gerardo
             careersGraph(navController)
         }
