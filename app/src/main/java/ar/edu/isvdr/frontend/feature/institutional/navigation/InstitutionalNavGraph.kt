@@ -35,5 +35,11 @@ fun NavGraphBuilder.institutionalGraph(
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+
+        composable("institutional_fechas") {
+            ar.edu.isvdr.frontend.feature.institutional.ui.FechasImportantesScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
     }
 }

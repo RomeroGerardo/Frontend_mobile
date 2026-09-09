@@ -114,6 +114,20 @@ object InstitutionalMockData {
             fecha = "15 Feb - 06 Mar",
             descripcion = "Módulos introductorios y de ambientación para ingresantes.",
             tipo = "Ingreso"
+        ),
+        FechaImportante(
+            id = "f5",
+            titulo = "Mesas de Exámenes Turno Febrero / Marzo",
+            fecha = "17 Feb - 07 Mar",
+            descripcion = "Mesas ordinarias de exámenes finales previas al inicio de cursado.",
+            tipo = "Exámenes"
+        ),
+        FechaImportante(
+            id = "f6",
+            titulo = "Inicio de Clases - 1° Cuatrimestre 2026",
+            fecha = "16 de Marzo",
+            descripcion = "Inicio formal del dictado de clases en todas las tecnicaturas y sedes.",
+            tipo = "Académico"
         )
     )
 
