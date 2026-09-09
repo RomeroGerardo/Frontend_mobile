@@ -64,6 +64,18 @@ data class SeccionInstitucional(
     val ruta: String
 )
 
+data class AreaContacto(
+    val nombre: String,
+    val responsable: String,
+    val email: String,
+    val horario: String
+)
+
+data class PreguntaFrecuente(
+    val pregunta: String,
+    val respuesta: String
+)
+
 object InstitutionalMockData {
 
     val infoGeneral = InstitutionalInfo(
@@ -251,6 +263,48 @@ object InstitutionalMockData {
             categoria = "Biblioteca",
             descripcion = "Acceso a bibliografía técnica, libros de consulta, salas de estudio grupal y recursos digitales disponibles para toda la comunidad del ISVDR.",
             estado = "Abierto de 18 a 22 hs"
+        )
+    )
+
+    val areasContacto = listOf(
+        AreaContacto(
+            nombre = "Secretaría Académica",
+            responsable = "Trámites generales, equivalencias y constancias",
+            email = "secretaria.isvdr@gmail.com",
+            horario = "Lunes a Viernes de 18:00 a 22:00 hs"
+        ),
+        AreaContacto(
+            nombre = "Preceptoría y Alumnado",
+            responsable = "Inscripciones a mesas de exámenes y regularidad",
+            email = "alumnos.isvdr@gmail.com",
+            horario = "Lunes a Viernes de 18:30 a 22:00 hs"
+        ),
+        AreaContacto(
+            nombre = "Coordinación de Prácticas",
+            responsable = "Convenios de pasantías y vinculación",
+            email = "practicas.isvdr@gmail.com",
+            horario = "Martes y Jueves de 19:00 a 21:30 hs"
+        ),
+        AreaContacto(
+            nombre = "Soporte Campus Virtual",
+            responsable = "Accesos y asistencia técnica en aulas virtuales",
+            email = "campus.isvdr@gmail.com",
+            horario = "Atención online permanente"
+        )
+    )
+
+    val preguntasFrecuentes = listOf(
+        PreguntaFrecuente(
+            pregunta = "¿Cuáles son los requisitos de ingreso?",
+            respuesta = "Haber completado el nivel secundario (o constancia de título en trámite), DNI vigente, partida de nacimiento legalizada y ficha médica."
+        ),
+        PreguntaFrecuente(
+            pregunta = "¿Cómo solicito una constancia de alumno regular?",
+            respuesta = "Podés solicitarla por correo a Secretaría o presencialmente en el horario de 18 a 22 hs con entrega en 48 hs hábiles."
+        ),
+        PreguntaFrecuente(
+            pregunta = "¿Tienen costo las carreras?",
+            respuesta = "No. El ISVDR es una institución de educación superior de gestión pública y gratuita."
         )
     )
 }

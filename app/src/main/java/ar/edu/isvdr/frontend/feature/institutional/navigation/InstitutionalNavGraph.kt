@@ -41,5 +41,11 @@ fun NavGraphBuilder.institutionalGraph(
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+
+        composable("institutional_contacto") {
+            ar.edu.isvdr.frontend.feature.institutional.ui.ContactoScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
     }
 }

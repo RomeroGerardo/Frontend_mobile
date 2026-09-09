@@ -76,4 +76,20 @@ class InstitutionalRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun getAreasContacto(): Result<List<ar.edu.isvdr.frontend.feature.institutional.model.AreaContacto>> {
+        return try {
+            Result.success(InstitutionalMockData.areasContacto)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getPreguntasFrecuentes(): Result<List<ar.edu.isvdr.frontend.feature.institutional.model.PreguntaFrecuente>> {
+        return try {
+            Result.success(InstitutionalMockData.preguntasFrecuentes)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
