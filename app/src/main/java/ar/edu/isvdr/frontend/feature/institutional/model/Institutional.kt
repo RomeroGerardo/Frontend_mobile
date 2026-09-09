@@ -18,6 +18,17 @@ data class MisionVision(
     val valores: List<String>
 )
 
+data class ValorDetalle(
+    val titulo: String,
+    val descripcion: String
+)
+
+data class HitoHistorico(
+    val periodo: String,
+    val titulo: String,
+    val descripcion: String
+)
+
 data class FechaImportante(
     val id: String,
     val titulo: String,
@@ -134,6 +145,52 @@ object InstitutionalMockData {
             titulo = "Contacto y Ubicación",
             subtitulo = "Canales de atención, teléfonos, correo y redes oficiales",
             ruta = "institutional_contacto"
+        )
+    )
+
+    val valoresDetallados = listOf(
+        ValorDetalle(
+            titulo = "Excelencia académica",
+            descripcion = "Planes de estudio actualizados, docentes con experiencia técnica y formación práctica orientada a la resolución de problemas reales."
+        ),
+        ValorDetalle(
+            titulo = "Compromiso social y regional",
+            descripcion = "Articulación permanente con organizaciones, municipios y el entramado productivo de Villa del Rosario y zonas aledañas."
+        ),
+        ValorDetalle(
+            titulo = "Innovación constante",
+            descripcion = "Incorporación continua de tecnologías digitales, metodologías activas y herramientas de vanguardia en cada tecnicatura."
+        ),
+        ValorDetalle(
+            titulo = "Inclusión e igualdad",
+            descripcion = "Acceso a educación superior pública, gratuita y de calidad sin distinciones, fomentando el desarrollo de talentos locales."
+        ),
+        ValorDetalle(
+            titulo = "Ética profesional",
+            descripcion = "Fomento de la responsabilidad, honestidad y rectitud tanto en la vida académica como en el futuro desempeño laboral."
+        )
+    )
+
+    val hitosHistoricos = listOf(
+        HitoHistorico(
+            periodo = "Fundación",
+            titulo = "Nacimiento de la Educación Superior en Villa del Rosario",
+            descripcion = "Se crea el Instituto para dar respuesta a la creciente demanda de formación técnica de jóvenes y trabajadores de la región que debían trasladarse a otras ciudades para continuar sus estudios."
+        ),
+        HitoHistorico(
+            periodo = "Crecimiento",
+            titulo = "Consolidación de las Primeras Tecnicaturas",
+            descripcion = "Se abren carreras pioneras respondiendo a la matriz productiva local, egresando las primeras camadas de técnicos que hoy lideran proyectos en la región."
+        ),
+        HitoHistorico(
+            periodo = "Modernización",
+            titulo = "Transformación Digital y Laboratorios",
+            descripcion = "Incorporación de equipamiento informático, entornos de aprendizaje modernos y convenios de pasantías con empresas e instituciones públicas."
+        ),
+        HitoHistorico(
+            periodo = "Actualidad",
+            titulo = "Referente Técnico Regional",
+            descripcion = "El ISVDR cuenta con múltiples sedes y carreras en constante actualización, consolidándose como un pilar fundamental del desarrollo educativo de Córdoba."
         )
     )
 }

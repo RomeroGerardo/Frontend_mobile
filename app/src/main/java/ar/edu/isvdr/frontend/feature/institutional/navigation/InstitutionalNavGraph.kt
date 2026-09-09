@@ -18,14 +18,15 @@ fun NavGraphBuilder.institutionalGraph(
         composable("institutional_main") {
             InstitutionalScreen(
                 onNavigateToSection = { ruta ->
-                    // Navegación interna preparada para las tarjetas 2, 3, 4 y 5
-                    try {
-                        navController.navigate(ruta)
-                    } catch (_: Exception) {
-                        // Fallback mientras se completan las siguientes tarjetas
-                    }
+                    navController.navigate(ruta)
                 },
                 onNavigateToCareers = onNavigateToCareers
+            )
+        }
+
+        composable("institutional_mision_vision") {
+            ar.edu.isvdr.frontend.feature.institutional.ui.MisionVisionHistoriaScreen(
+                onNavigateBack = { navController.popBackStack() }
             )
         }
     }

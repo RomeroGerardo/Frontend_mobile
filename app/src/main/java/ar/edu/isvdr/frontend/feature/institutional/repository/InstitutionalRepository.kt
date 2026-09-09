@@ -52,4 +52,20 @@ class InstitutionalRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun getValoresDetallados(): Result<List<ar.edu.isvdr.frontend.feature.institutional.model.ValorDetalle>> {
+        return try {
+            Result.success(InstitutionalMockData.valoresDetallados)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun getHitosHistoricos(): Result<List<ar.edu.isvdr.frontend.feature.institutional.model.HitoHistorico>> {
+        return try {
+            Result.success(InstitutionalMockData.hitosHistoricos)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

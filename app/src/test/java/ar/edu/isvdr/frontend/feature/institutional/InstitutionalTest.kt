@@ -63,5 +63,30 @@ class InstitutionalTest {
 
         assertTrue(seccionesResult.isSuccess)
         assertEquals(4, seccionesResult.getOrNull()?.size)
+
+        val valoresResult = repository.getValoresDetallados()
+        assertTrue(valoresResult.isSuccess)
+        assertEquals(5, valoresResult.getOrNull()?.size)
+
+        val hitosResult = repository.getHitosHistoricos()
+        assertTrue(hitosResult.isSuccess)
+        assertEquals(4, hitosResult.getOrNull()?.size)
+    }
+
+    @Test
+    fun `verificar modelo de ValorDetalle e HitoHistorico`() {
+        val valor = ar.edu.isvdr.frontend.feature.institutional.model.ValorDetalle(
+            titulo = "Innovación constante",
+            descripcion = "Incorporación de tecnologías emergentes."
+        )
+        assertEquals("Innovación constante", valor.titulo)
+
+        val hito = ar.edu.isvdr.frontend.feature.institutional.model.HitoHistorico(
+            periodo = "Fundación",
+            titulo = "Nacimiento de la Educación Superior",
+            descripcion = "Creación del instituto."
+        )
+        assertEquals("Fundación", hito.periodo)
+        assertEquals("Nacimiento de la Educación Superior", hito.titulo)
     }
 }
