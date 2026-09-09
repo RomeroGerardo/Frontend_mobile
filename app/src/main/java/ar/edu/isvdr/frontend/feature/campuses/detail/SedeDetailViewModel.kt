@@ -1,9 +1,9 @@
-package ar.edu.isvdr.frontend.feature.campuses.ui
+package ar.edu.isvdr.frontend.feature.campuses.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ar.edu.isvdr.frontend.feature.campuses.data.SedeRepository
-import ar.edu.isvdr.frontend.feature.campuses.data.SedeRepositoryImpl
+import ar.edu.isvdr.frontend.feature.campuses.repository.SedeRepository
+import ar.edu.isvdr.frontend.feature.campuses.repository.SedeRepositoryImpl
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

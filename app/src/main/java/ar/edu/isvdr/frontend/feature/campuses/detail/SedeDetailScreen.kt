@@ -1,4 +1,4 @@
-package ar.edu.isvdr.frontend.feature.campuses.ui
+package ar.edu.isvdr.frontend.feature.campuses.detail
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -8,13 +8,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ar.edu.isvdr.frontend.feature.campuses.data.Carrera
-import ar.edu.isvdr.frontend.feature.campuses.data.Sede
+import ar.edu.isvdr.frontend.feature.campuses.model.Carrera
+import ar.edu.isvdr.frontend.feature.campuses.model.Sede
 
 @Composable
 fun SedeDetailScreen(
     sedeId: String,
-    viewModel: SedeDetailViewModel = viewModel()
+    viewModel: SedeDetailViewModel = viewModel(),
+    onNavigateBack: () -> Unit = {}
 ) {
     val state by viewModel.uiState.collectAsState()
 

@@ -1,4 +1,4 @@
-package ar.edu.isvdr.frontend.feature.campuses.ui
+package ar.edu.isvdr.frontend.feature.campuses.list
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -8,12 +8,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ar.edu.isvdr.frontend.feature.campuses.data.Sede
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.tooling.preview.Preview
+import ar.edu.isvdr.frontend.feature.campuses.model.Sede
 
 @Composable
 fun SedesListScreen(

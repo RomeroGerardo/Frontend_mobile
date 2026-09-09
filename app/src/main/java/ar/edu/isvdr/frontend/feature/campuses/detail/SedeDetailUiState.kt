@@ -1,7 +1,7 @@
-package ar.edu.isvdr.frontend.feature.campuses.ui
+package ar.edu.isvdr.frontend.feature.campuses.detail
 
-import ar.edu.isvdr.frontend.feature.campuses.data.Carrera
-import ar.edu.isvdr.frontend.feature.campuses.data.Sede
+import ar.edu.isvdr.frontend.feature.campuses.model.Carrera
+import ar.edu.isvdr.frontend.feature.campuses.model.Sede
 
 data class SedeDetailUiState(
     val isLoading: Boolean = false,

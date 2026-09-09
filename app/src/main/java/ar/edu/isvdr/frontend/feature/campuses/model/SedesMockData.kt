@@ -1,4 +1,4 @@
-package ar.edu.isvdr.frontend.feature.campuses.data
+package ar.edu.isvdr.frontend.feature.campuses.model
 
 val sedesMock = listOf(
     Sede(

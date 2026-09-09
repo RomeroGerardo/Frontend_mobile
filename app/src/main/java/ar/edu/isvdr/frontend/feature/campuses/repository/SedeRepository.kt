@@ -1,10 +1,15 @@
-package ar.edu.isvdr.frontend.feature.campuses.data
+package ar.edu.isvdr.frontend.feature.campuses.repository
+
+import ar.edu.isvdr.frontend.feature.campuses.model.Carrera
+import ar.edu.isvdr.frontend.feature.campuses.model.Sede
+import ar.edu.isvdr.frontend.feature.campuses.model.carrerasMock
+import ar.edu.isvdr.frontend.feature.campuses.model.sedesMock
 
 interface SedeRepository {
     suspend fun getSedes(): List<Sede>
     suspend fun getSedeById(id: String): Sede?
     suspend fun buscarSedes(query: String): List<Sede>
-    suspend fun getCarrerasDeSede(sede: Sede): List<Carrera>
+    suspend fun getCarrerasDeSede(sede: Sede): List<Carrera> // temporal, ver TODO en CarreraMock.kt
 }
 
 class SedeRepositoryImpl : SedeRepository {
@@ -23,8 +28,9 @@ class SedeRepositoryImpl : SedeRepository {
             it.provincia.contains(query, ignoreCase = true) ||
             it.nombre.contains(query, ignoreCase = true)
         }
+    }
 
-    // TODO: reemplazar por una llamada real a Gerardo's getCarrerasByIds(sede.carrerasIds)
+    // TODO: reemplazar por una llamada real al repositorio de Carreras de Gerardo
     override suspend fun getCarrerasDeSede(sede: Sede): List<Carrera> =
         carrerasMock.filter { it.id in sede.carrerasIds }
 }
