@@ -4,11 +4,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -16,6 +14,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import coil.compose.AsyncImage
 import ar.edu.isvdr.frontend.feature.careers.model.Career
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,10 +38,19 @@ fun CareerDetailScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Detalle de Carrera") },
+                title = {
+                    Text(
+                        text = "Detalle de Carrera",
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.Bold
+                    )
+                },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Volver")
+                        Icon(
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            contentDescription = "Volver"
+                        )
                     }
                 }
             )
@@ -64,9 +75,50 @@ fun CareerDetailScreen(
                 }
                 uiState.career != null -> {
                     val careerToDraw = uiState.career!!
+                    var showPreinscripcionDialog by remember { mutableStateOf(false) }
+
+                    if (showPreinscripcionDialog) {
+                        PreinscripcionDialog(
+                            careerId = careerId,
+                            careerName = careerToDraw.nombre,
+                            isLoading = uiState.isSubmittingPreinscripcion,
+                            errorMessage = uiState.preinscripcionError,
+                            onDismiss = { showPreinscripcionDialog = false },
+                            onSubmit = { request ->
+                                viewModel.enviarPreinscripcion(request)
+                            }
+                        )
+                    }
+
+                    if (uiState.preinscripcionSuccess) {
+                        AlertDialog(
+                            onDismissRequest = {
+                                showPreinscripcionDialog = false
+                                viewModel.resetPreinscripcionStatus()
+                            },
+                            title = { Text("¡Preinscripción Registrada!") },
+                            text = {
+                                Text("Tu solicitud de preinscripción fue enviada exitosamente a la institución. Nos pondremos en contacto vía correo o teléfono.")
+                            },
+                            confirmButton = {
+                                TextButton(
+                                    onClick = {
+                                        showPreinscripcionDialog = false
+                                        viewModel.resetPreinscripcionStatus()
+                                    }
+                                ) {
+                                    Text("Aceptar")
+                                }
+                            }
+                        )
+                    }
+
                     CareerDetailContent(
                         career = careerToDraw,
-                        onPreinscribirseClick = { onPreinscribirseClick(careerId) }
+                        onPreinscribirseClick = {
+                            showPreinscripcionDialog = true
+                            onPreinscribirseClick(careerId)
+                        }
                     )
                 }
             }
@@ -88,6 +140,19 @@ private fun CareerDetailContent(
             .verticalScroll(scrollState)
             .padding(16.dp)
     ) {
+        if (!career.imagenUrl.isNullOrBlank()) {
+            AsyncImage(
+                model = career.imagenUrl,
+                contentDescription = career.nombre,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(200.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+        }
+
         Text(
             text = career.nombre,
             style = MaterialTheme.typography.headlineMedium,

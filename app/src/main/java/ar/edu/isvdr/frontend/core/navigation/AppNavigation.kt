@@ -18,6 +18,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.compose.ui.unit.dp
 import ar.edu.isvdr.frontend.feature.careers.navigation.careersGraph
 import ar.edu.isvdr.frontend.feature.campuses.navigation.sedesGraph
+import ar.edu.isvdr.frontend.feature.institutional.navigation.institutionalGraph
+import ar.edu.isvdr.frontend.feature.news.navigation.newsGraph
+import ar.edu.isvdr.frontend.feature.gallery.navigation.galleryGraph
 
 @Composable
 fun AppNavigation() {
@@ -27,7 +30,8 @@ fun AppNavigation() {
         TopLevelDestination.Home,
         TopLevelDestination.Institutional,
         TopLevelDestination.Careers,
-        TopLevelDestination.Sedes
+        TopLevelDestination.Sedes,
+        TopLevelDestination.News
     )
 
     Scaffold(
@@ -42,13 +46,21 @@ fun AppNavigation() {
                         label = { Text(screen.title) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
-                            navController.navigate(screen.route) {
-                                // Evitar crear múltiples copias del mismo destino
-                                popUpTo(navController.graph.findStartDestination().id) {
-                                    saveState = true
+                            if (screen == TopLevelDestination.Home) {
+                                navController.navigate(screen.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        inclusive = false
+                                    }
+                                    launchSingleTop = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
+                            } else {
+                                navController.navigate(screen.route) {
+                                    popUpTo(navController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
+                                }
                             }
                         }
                     )
@@ -64,20 +76,58 @@ fun AppNavigation() {
             composable(TopLevelDestination.Home.route) {
                 ar.edu.isvdr.frontend.feature.home.HomeScreen(
                     onNavigateToCareers = {
-                        navController.navigate(TopLevelDestination.Careers.route)
+                        navController.navigate(TopLevelDestination.Careers.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     },
                     onNavigateToInstitutional = {
-                        navController.navigate(TopLevelDestination.Institutional.route)
+                        navController.navigate(TopLevelDestination.Institutional.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    onNavigateToNews = {
+                        navController.navigate(TopLevelDestination.News.route) {
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                    onNavigateToGallery = {
+                        navController.navigate("gallery_list")
                     }
                 )
             }
-            composable(TopLevelDestination.Institutional.route) {
-                Text("Pantalla Institucional", modifier = Modifier.padding(16.dp))
-            }
-            // Agregamos el grafo de carreras que hizo Gerardo
+            // Grafo institucional
+            institutionalGraph(
+                navController = navController,
+                onNavigateToCareers = {
+                    navController.navigate(TopLevelDestination.Careers.route) {
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        launchSingleTop = true
+                        restoreState = true
+                    }
+                }
+            )
+            // Grafo de carreras
             careersGraph(navController)
-            // Agregamos el grafo de sedes
+            // Grafo de sedes
             sedesGraph(navController)
+            // Grafo de noticias
+            newsGraph(navController)
+            // Grafo de galería
+            galleryGraph(navController)
         }
     }
 }

@@ -2,7 +2,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:theme="@style/Theme.FrontendMobile"
-        android:label="ISVDR">
+        android:label="ISVDR"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round">
         <activity
             android:name=".MainActivity"
             android:exported="true">

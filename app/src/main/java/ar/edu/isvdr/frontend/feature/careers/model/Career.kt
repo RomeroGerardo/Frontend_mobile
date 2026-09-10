@@ -14,6 +14,7 @@ data class Career(
     val tituloOtorgado: String?,
     val modalidad: String,
     val activa: Boolean,
+    val imagenUrl: String? = null,
     val createdAt: String,
     val updatedAt: String
 )

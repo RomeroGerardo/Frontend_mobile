@@ -39,4 +39,43 @@ class CareerDetailViewModel(
             }
         }
     }
+
+    fun enviarPreinscripcion(request: ar.edu.isvdr.frontend.feature.careers.model.PreinscripcionRequest) {
+        _uiState.update {
+            it.copy(
+                isSubmittingPreinscripcion = true,
+                preinscripcionError = null,
+                preinscripcionSuccess = false
+            )
+        }
+
+        viewModelScope.launch {
+            val result = repository.preinscribirse(request)
+            if (result.isSuccess) {
+                _uiState.update {
+                    it.copy(
+                        isSubmittingPreinscripcion = false,
+                        preinscripcionSuccess = true
+                    )
+                }
+            } else {
+                _uiState.update {
+                    it.copy(
+                        isSubmittingPreinscripcion = false,
+                        preinscripcionError = result.exceptionOrNull()?.message ?: "Error al procesar la preinscripción. Verifica los datos."
+                    )
+                }
+            }
+        }
+    }
+
+    fun resetPreinscripcionStatus() {
+        _uiState.update {
+            it.copy(
+                isSubmittingPreinscripcion = false,
+                preinscripcionSuccess = false,
+                preinscripcionError = null
+            )
+        }
+    }
 }
